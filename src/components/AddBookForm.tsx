@@ -44,12 +44,22 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onFormSubmit }) => {
       date: new Date(),
       rating: 0,
       memo: "",
-      imageUrl: undefined,
+      imageUrl: "",
     },
   });
 
   const onSubmit = (data: BookFormValues) => {
-    addBookEntry(data);
+    // Ensure all required fields exist (TypeScript validation)
+    const bookData = {
+      title: data.title,
+      author: data.author,
+      date: data.date,
+      rating: data.rating,
+      memo: data.memo || "",
+      imageUrl: data.imageUrl || "",
+    };
+    
+    addBookEntry(bookData);
     form.reset();
     onFormSubmit();
   };
@@ -125,7 +135,7 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onFormSubmit }) => {
           name="imageUrl"
           render={({ field }) => (
             <FormItem>
-              {/* ImageUploader doesn't have a FormLabel in its own structure, so we adapt */}
+              <FormLabel>이미지 (선택)</FormLabel>
               <ImageUploader imageUrl={field.value} onImageChange={field.onChange} />
               <FormMessage />
             </FormItem>
@@ -138,4 +148,3 @@ const AddBookForm: React.FC<AddBookFormProps> = ({ onFormSubmit }) => {
 };
 
 export default AddBookForm;
-
