@@ -35,3 +35,27 @@ export interface UserPreferences {
   theme: 'light' | 'dark';
   language: 'ko' | 'en';
 }
+
+// New types for Book and Movie logging app
+export interface BookEntry {
+  id: string;
+  type: 'book';
+  title: string;
+  author: string;
+  date: Date; // Date recorded/read
+  rating: number; // 1-5
+  memo?: string;
+  imageUrl?: string;
+}
+
+export interface MovieEntry {
+  id: string;
+  type: 'movie';
+  title: string;
+  director: string;
+  date: Date; // Date recorded/watched
+  rating: number; // 1-5
+  memo?: string;
+  imageUrl?: string;
+}
+
